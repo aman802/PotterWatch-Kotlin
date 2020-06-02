@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/characterList">
+
+    <fragment
+        android:id="@+id/characterList"
+        android:name="com.aman802.potterwatch.characterslist.CharacterList"
+        android:label="fragment_character_list"
+        tools:layout="@layout/fragment_character_list" >
+        <action
+            android:id="@+id/action_characterList_to_characterOverview"
+            app:destination="@id/characterOverview" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterOverview"
+        android:name="com.aman802.potterwatch.characteroverview.CharacterOverview"
+        android:label="fragment_character_overview"
+        tools:layout="@layout/fragment_character_overview" >
+        <action
+            android:id="@+id/action_characterOverview_to_characterList"
+            app:destination="@id/characterList"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popEnterAnim="@android:anim/slide_in_left"/>
+        <argument
+            android:name="characterId"
+            app:argType="string" />
+        <argument
+            android:name="characterName"
+            app:argType="string" />
+    </fragment>
+</navigation>
