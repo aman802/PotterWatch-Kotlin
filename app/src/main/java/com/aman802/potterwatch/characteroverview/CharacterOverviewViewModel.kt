@@ -53,4 +53,10 @@ class CharacterOverviewViewModel(val context: Context, val id: String) : ViewMod
         })
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        VolleyService.cancelAllCalls(TAG)
+        _progressBarVisible.value = false
+    }
+
 }

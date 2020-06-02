@@ -29,25 +29,24 @@ object VolleyService {
     private var requestQueue: RequestQueue? = null
 
     fun getAllCharacters(context: Context, TAG: String, mCallback: JSONArrayInterface) {
-        if (requestQueue == null) {
+        if (requestQueue == null)
             requestQueue = Volley.newRequestQueue(context)
 
-            val url = "$BASE_URL/characters?key=$apiKey"
+        val url = "$BASE_URL/characters?key=$apiKey"
 
-            val jsonArrayRequest = JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                Response.Listener { response ->
-                    mCallback.onJSONArraySuccess(response)
-                },
-                Response.ErrorListener { error ->
-                    mCallback.onError(error)
-                })
+        val jsonArrayRequest = JsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            Response.Listener { response ->
+                mCallback.onJSONArraySuccess(response)
+            },
+            Response.ErrorListener { error ->
+                mCallback.onError(error)
+            })
 
-            jsonArrayRequest.tag = TAG
-            requestQueue?.add(jsonArrayRequest)
-        }
+        jsonArrayRequest.tag = TAG
+        requestQueue?.add(jsonArrayRequest)
     }
 
     fun getCharacterFromId(context: Context, id: String, TAG: String, mCallback: JSONObjectInterface) {
@@ -69,5 +68,9 @@ object VolleyService {
 
         jsonObjectRequest.tag = TAG
         requestQueue?.add(jsonObjectRequest)
+    }
+
+    fun cancelAllCalls(tag: String) {
+        requestQueue?.cancelAll(tag)
     }
 }

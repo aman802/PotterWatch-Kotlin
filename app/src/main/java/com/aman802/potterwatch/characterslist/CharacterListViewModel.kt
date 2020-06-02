@@ -60,4 +60,10 @@ class CharacterListViewModel(val context: Context) : ViewModel() {
         _navigateToCharacterOverview.value = null
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        VolleyService.cancelAllCalls(TAG)
+        _progressBarVisible.value = false
+    }
+
 }
