@@ -15,9 +15,29 @@ class CharacterModel(response: JSONObject) {
         }
         else {
             if (response.has("school")) {
-                val schoolName = response.getString("school")
-                if (schoolName == "Hogwarts School of Witchcraft and Wizardry") {
-                    house = "Hogwarts"
+                when (response.getString("school")) {
+                    "Hogwarts School of Witchcraft and Wizardry" -> house = "Hogwarts"
+                    "Beauxbatons Academy of Magic" -> house = "Beauxbatons"
+                    "Durmstrang Institute" -> house = "Durmstrang"
+                }
+            }
+            else {
+                val deathEater = response.getBoolean("deathEater")
+                val orderOfThePhoenix = response.getBoolean("orderOfThePhoenix")
+                val ministryOfMagic = response.getBoolean("ministryOfMagic")
+                val dumbledoresArmy = response.getBoolean("dumbledoresArmy")
+
+                if (deathEater) {
+                    house = "Death"
+                }
+                else if (orderOfThePhoenix) {
+                    house = "Phoenix"
+                }
+                else if (ministryOfMagic) {
+                    house = "Ministry"
+                }
+                else if (dumbledoresArmy) {
+                    house = "DA"
                 }
             }
         }
